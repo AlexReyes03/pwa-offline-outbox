@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Registro de incidencias en campo con soporte offline y sincronización Outbox.">
+  <title>Registro de Incidencias en Campo | PWA Outbox</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-content">
+      <h1>Registro de Incidencias en Campo</h1>
+      <span id="badge-red" class="badge" aria-live="polite">Verificando red...</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card" aria-labelledby="titulo-formulario">
+      <h2 id="titulo-formulario">Nueva incidencia</h2>
+      <form id="form-incidencia">
+        <div class="form-group">
+          <label for="titulo">Título de la incidencia</label>
+          <input
+            type="text"
+            id="titulo"
+            name="titulo"
+            placeholder="Indica el título para esta incidencia"
+            maxlength="120"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="descripcion">Descripción</label>
+          <textarea
+            id="descripcion"
+            name="descripcion"
+            rows="4"
+            placeholder="Describe el detalle observado en campo..."
+            maxlength="500"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" id="btn-enviar" class="btn btn-primary">
+          Enviar
+        </button>
+      </form>
+      <p id="estado-envio" class="feedback" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card" aria-labelledby="titulo-bandeja">
+      <div class="bandeja-header">
+        <h2 id="titulo-bandeja">Bandeja de salida</h2>
+        <button type="button" id="btn-purgar" class="btn btn-secondary">
+          Purgar sincronizados
+        </button>
+      </div>
+      <ul id="lista-outbox" class="outbox-list" aria-live="polite"></ul>
+    </section>
+  </main>
+
+  <script src="./db-helper.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
